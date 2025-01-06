@@ -1,4 +1,4 @@
-package com.dev.sprint_boot_rest_basics_2.entity;
+package com.dev.sprint_boot_rest_security_basics.entity;
 
 import jakarta.persistence.*;
 

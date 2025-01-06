@@ -1,7 +1,7 @@
-package com.dev.sprint_boot_rest_basics_2.service;
+package com.dev.sprint_boot_rest_security_basics.service;
 
-import com.dev.sprint_boot_rest_basics_2.entity.Employee;
-import com.dev.sprint_boot_rest_basics_2.repository.EmployeeRepository;
+import com.dev.sprint_boot_rest_security_basics.entity.Employee;
+import com.dev.sprint_boot_rest_security_basics.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

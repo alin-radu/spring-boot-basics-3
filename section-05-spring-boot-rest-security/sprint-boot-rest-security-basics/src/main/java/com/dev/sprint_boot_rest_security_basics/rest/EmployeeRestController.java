@@ -1,7 +1,7 @@
-package com.dev.sprint_boot_rest_basics_2.rest;
+package com.dev.sprint_boot_rest_security_basics.rest;
 
-import com.dev.sprint_boot_rest_basics_2.entity.Employee;
-import com.dev.sprint_boot_rest_basics_2.service.EmployeeService;
+import com.dev.sprint_boot_rest_security_basics.entity.Employee;
+import com.dev.sprint_boot_rest_security_basics.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;

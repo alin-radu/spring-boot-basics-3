@@ -1,4 +1,4 @@
-package com.dev.sprint_boot_rest_basics_2;
+package com.dev.sprint_boot_rest_security_basics;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

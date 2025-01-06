@@ -1,10 +1,10 @@
-package com.dev.sprint_boot_rest_basics_2.dao;
+package com.dev.sprint_boot_rest_security_basics.service;
 
-import com.dev.sprint_boot_rest_basics_2.entity.Employee;
+import com.dev.sprint_boot_rest_security_basics.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeDAO {
+public interface EmployeeService {
 
     List<Employee> findAll();
 
