@@ -6,6 +6,8 @@ use `hb-01-one-to-one-uni`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
+DROP TABLE IF EXISTS `instructor_detail`;
+
 CREATE TABLE `instructor_detail` (
   `id` int NOT NULL AUTO_INCREMENT,
   `youtube_channel` varchar(128) DEFAULT NULL,
@@ -13,6 +15,7 @@ CREATE TABLE `instructor_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `instructor`;
 
 CREATE TABLE `instructor` (
   `id` int NOT NULL AUTO_INCREMENT,
