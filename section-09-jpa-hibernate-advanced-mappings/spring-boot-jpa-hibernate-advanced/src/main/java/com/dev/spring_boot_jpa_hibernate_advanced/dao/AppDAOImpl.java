@@ -1,11 +1,15 @@
 package com.dev.spring_boot_jpa_hibernate_advanced.dao;
 
+import com.dev.spring_boot_jpa_hibernate_advanced.entity.Course;
 import com.dev.spring_boot_jpa_hibernate_advanced.entity.Instructor;
 import com.dev.spring_boot_jpa_hibernate_advanced.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class AppDAOImpl implements AppDAO {
@@ -19,15 +23,16 @@ public class AppDAOImpl implements AppDAO {
 
     @Override
     @Transactional
-    public void save(Instructor instructor) {
+    public void saveInstructor(Instructor instructor) {
         entityManager.persist(instructor);
     }
 
     @Override
-    public Instructor findInstructorById(int id) {
+    public Instructor findInstructorSummaryById(int id) {
         return entityManager.find(Instructor.class, id);
     }
 
+    // delete the instructor and the instructor details;
     @Override
     @Transactional
     public void deleteInstructorById(int id) {
@@ -44,6 +49,7 @@ public class AppDAOImpl implements AppDAO {
         return entityManager.find(InstructorDetail.class, id);
     }
 
+    // delete instructorDetails, keep the instructor
     @Override
     @Transactional
     public void deleteInstructorDetailById(int id) {
@@ -57,4 +63,62 @@ public class AppDAOImpl implements AppDAO {
         entityManager.remove(tempInstructorDetail);
 
     }
+    @Override
+    public List<Course> findCoursesByInstructorId(int id) {
+//        TypedQuery<Course> query = entityManager.createQuery(
+//                "SELECT c FROM Course c " +
+//                        "INNER JOIN  Instructor as i ON i.id = c.instructor.id " +
+//                        "WHERE i.id = :data", Course.class
+//        );
+
+        TypedQuery<Course> query = entityManager.createQuery(
+                "FROM Course WHERE instructor.id = :data", Course.class
+        );
+
+        query.setParameter("data", id);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public Instructor findInstructorFullInfoById(int id) {
+        TypedQuery<Instructor> query = entityManager.createQuery(
+                "SELECT i FROM Instructor i " +
+                        "JOIN FETCH i.courses " +
+                        "WHERE i.id = :data", Instructor.class
+        );
+
+        query.setParameter("data", id);
+
+        Instructor tempInstructor = query.getSingleResult();
+        return null;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
