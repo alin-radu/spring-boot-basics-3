@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "review")
 public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -13,6 +14,7 @@ public class Review {
     @Column(name = "comment")
     private String comment;
 
+    // constructors
     public Review() {
 
     }
@@ -21,6 +23,7 @@ public class Review {
         this.comment = comment;
     }
 
+    // setters and getters
     public int getId() {
         return id;
     }
@@ -37,6 +40,7 @@ public class Review {
         this.comment = comment;
     }
 
+    // toString
     @Override
     public String toString() {
         return "Review{" +

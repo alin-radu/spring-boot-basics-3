@@ -1,10 +1,7 @@
 package com.dev.spring_boot_jpa_hibernate_advanced;
 
 import com.dev.spring_boot_jpa_hibernate_advanced.dao.AppDAO;
-import com.dev.spring_boot_jpa_hibernate_advanced.entity.Course;
-import com.dev.spring_boot_jpa_hibernate_advanced.entity.Instructor;
-import com.dev.spring_boot_jpa_hibernate_advanced.entity.InstructorDetail;
-import com.dev.spring_boot_jpa_hibernate_advanced.entity.Review;
+import com.dev.spring_boot_jpa_hibernate_advanced.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -45,39 +42,121 @@ public class Application {
 
 //            deleteCourseById(appDAO);
 
-//             createCourseAndReviews(appDAO);
+//            createCourseAndReviews(appDAO);
 
-//             retrieveCourseAndReviews(appDAO);
+//            retrieveCourseAndReviews(appDAO);
 
 //            deleteCourseAndReviews(appDAO);
 
+//            createCourseAndStudents(appDAO);
+
+//            findCourseAndStudents(appDAO);
+
+//            findStudentAndCourses(appDAO);
+
+//            addMoreCoursesForStudent(appDAO);
+
+//            deleteCourse(appDAO);
+
+//            deleteStudent(appDAO);
+
         };
+    }
+    private void deleteStudent(AppDAO appDAO) {
+
+        int id = 1;
+
+        System.out.println("Deleting student id: " + id);
+
+        appDAO.deleteStudentById(id);
+
+        System.out.println("---> Operation completed.");
+    }
+
+    private void addMoreCoursesForStudent(AppDAO appDAO) {
+
+        int id = 2;
+        Student tempStudent = appDAO.findStudentAndCoursesByStudentId(id);
+
+        Course tempCourse1 = new Course("Rubik's Cube - How to Speed Cube");
+        Course tempCourse2 = new Course("Atari 2600 - Game Development");
+
+        tempStudent.addCourse(tempCourse1);
+        tempStudent.addCourse(tempCourse2);
+
+        System.out.println("Updating student: " + tempStudent);
+        System.out.println("associated courses: " + tempStudent.getCourses());
+
+        appDAO.updateStudent(tempStudent);
+
+        System.out.println("---> Operation completed.");
+    }
+
+    private void findStudentAndCourses(AppDAO appDAO) {
+
+        int id = 2;
+        Student tempStudent = appDAO.findStudentAndCoursesByStudentId(id);
+
+        System.out.println("Loaded student: " + tempStudent);
+        System.out.println("Courses: " + tempStudent.getCourses());
+
+        System.out.println("---> Operation completed.");
+    }
+
+    private void findCourseAndStudents(AppDAO appDAO) {
+
+        int id = 10;
+        Course tempCourse = appDAO.findCourseAndStudentsByCourseId(id);
+
+        System.out.println("Loaded course: " + tempCourse);
+        System.out.println("Students: " + tempCourse.getStudents());
+
+        System.out.println("---> Operation completed.");
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+
+        Course tempCourse = new Course("Pacman - How To Score One Million Points");
+
+        Student tempStudent1 = new Student("John", "Doe", "john@luv2code.com");
+        Student tempStudent2 = new Student("Mary", "Public", "mary@luv2code.com");
+
+        tempCourse.addStudent(tempStudent1);
+        tempCourse.addStudent(tempStudent2);
+
+        System.out.println("Saving the course: " + tempCourse);
+        System.out.println("associated students: " + tempCourse.getStudents());
+
+        appDAO.saveCourse(tempCourse);
+
+        System.out.println("---> Operation completed.");
     }
 
     private void deleteCourseAndReviews(AppDAO appDAO) {
 
-        int theId = 10;
+        int id = 10;
 
-        System.out.println("Deleting course id: " + theId);
+        System.out.println("Deleting course id: " + id);
 
-        appDAO.deleteCourseById(theId);
+        appDAO.deleteCourseById(id);
 
-        System.out.println("Done!");
+        System.out.println("---> Operation completed.");
     }
 
+    // retrieveCourseAndReviews
     private void retrieveCourseAndReviews(AppDAO appDAO) {
 
-        // get the course and reviews
-        int theId = 10;
-        Course tempCourse = appDAO.findCourseAndReviewsByCourseId(theId);
+        int id = 10;
 
-        // print the course
+        Course tempCourse = appDAO.findCourseAndReviewsByCourseId(id);
+
         System.out.println(tempCourse);
-
-        // print the reviews
         System.out.println(tempCourse.getReviews());
+
+        System.out.println("---> Operation completed.");
     }
 
+    // createCourseAndReviews
     private void createCourseAndReviews(AppDAO appDAO) {
 
         Course tempCourse = new Course("Pacman - How To Score One Million Points");
@@ -88,13 +167,14 @@ public class Application {
 
         System.out.println("---> Saving the course: " + tempCourse + " ...");
 
-        appDAO.save(tempCourse);
+        appDAO.saveCourse(tempCourse);
 
         System.out.println("---> Operation completed.");
     }
 
     // deleteInstructorDetailById
     private void deleteCourseById(AppDAO appDAO) {
+
         int id = 15;
 
         System.out.println("---> Deleting the course with the id: " + id);
@@ -105,6 +185,7 @@ public class Application {
     }
 
     private void updateCourse(AppDAO appDAO) {
+
         int id = 10;
 
         System.out.println("---> Finding the course with the id: " + id);
@@ -119,6 +200,7 @@ public class Application {
     }
 
     private void updateInstructor(AppDAO appDAO) {
+
         int id = 1;
 
         System.out.println("---> Finding the instructor with the id: " + id);
@@ -135,6 +217,7 @@ public class Application {
 
     // findInstructorFullInfoById
     private void findInstructorFullInfoById(AppDAO appDAO) {
+
         int id = 1;
 
         System.out.println("---> Finding the instructor with the id: " + id);
@@ -148,6 +231,7 @@ public class Application {
         System.out.println("---> Operation completed.");
     }
     private void findCoursesForInstructorId(AppDAO appDAO) {
+
         int id = 1;
 
         System.out.println("---> Finding the instructor with the id: " + id);
@@ -167,6 +251,7 @@ public class Application {
 
     // createInstructorWithCourses
     private void createInstructorWithCourses(AppDAO appDAO) {
+
         int id = 15;
 
         Instructor tempInstructor =
@@ -189,6 +274,7 @@ public class Application {
 
     // deleteInstructorDetailById
     private void deleteInstructorDetailById(AppDAO appDAO) {
+
         int id = 18;
 
         System.out.println("---> Deleting the instructorDetail with the id: " + id);
@@ -200,6 +286,7 @@ public class Application {
 
     // findInstructorDetailById
     private void findInstructorDetailById(AppDAO appDAO) {
+
         int id = 7;
 
         System.out.println("---> Finding the instructorDetail with the id: " + id);
@@ -214,6 +301,7 @@ public class Application {
 
     // deleteInstructorById
     private void deleteInstructorById(AppDAO appDAO) {
+
         int id = 3;
 
         System.out.println("---> Deleting the instructor with the id: " + id);
@@ -225,6 +313,7 @@ public class Application {
 
     // findInstructorSummaryById
     private void findInstructorById(AppDAO appDAO) {
+
         int id = 1;
 
         System.out.println("---> Finding the instructor with the id: " + id);
@@ -240,6 +329,7 @@ public class Application {
 
     // createInstructor
     private void createInstructor(AppDAO appDAO) {
+
         int id = 5;
 
         Instructor tempInstructor =

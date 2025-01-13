@@ -26,9 +26,26 @@ public class Course {
     @JoinColumn(name = "instructor_id")
     Instructor instructor;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "course_id")
     private List<Review> reviews;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+    },
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private List<Student> students;
 
     // constructors
     public Course() {
@@ -62,6 +79,13 @@ public class Course {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
     // addReview
     public void addReview(Review theReview) {
@@ -71,6 +95,16 @@ public class Course {
         }
 
         reviews.add(theReview);
+    }
+
+    // addStudent
+    public void addStudent(Student theStudent) {
+
+        if (students == null) {
+            students = new ArrayList<>();
+        }
+
+        students.add(theStudent);
     }
 
     // toString
