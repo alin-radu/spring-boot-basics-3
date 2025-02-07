@@ -77,6 +77,8 @@ public class AppDAOImpl implements AppDAO {
         entityManager.remove(tempInstructorDetail);
 
     }
+
+    // findCoursesByInstructorId
     @Override
     public List<Course> findCoursesByInstructorId(int id) {
 //        TypedQuery<Course> query = entityManager.createQuery(
